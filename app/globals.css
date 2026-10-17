@@ -184,10 +184,18 @@ a {
 /* --------------------------------------------------------------------------
    Responsive base adjustments
    -------------------------------------------------------------------------- */
+@media (max-width: 639px) {
+  :root {
+    --section-y: clamp(3rem, 1.8rem + 4.5vw, 5rem);
+    --fs-h2: clamp(1.9rem, 1rem + 4vw, 3rem);
+  }
+}
+
 @media (max-width: 479px) {
   :root {
     --header-h: 64px;
     --section-y: clamp(2.5rem, 1.5rem + 4vw, 4rem);
+    --fs-h2: clamp(1.75rem, 0.8rem + 4.5vw, 2.6rem);
   }
   .btn {
     min-height: 48px;
@@ -205,6 +213,7 @@ a {
   :root {
     --header-h: 58px;
     --gutter: 14px;
+    --fs-h2: clamp(1.55rem, 0.6rem + 5vw, 2.2rem);
   }
   .btn {
     min-height: 44px;

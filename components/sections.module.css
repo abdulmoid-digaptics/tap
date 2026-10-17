@@ -1135,6 +1135,28 @@
   .heroActions > a {
     flex: 1 1 100%;
   }
+  .heroTitle {
+    font-size: clamp(2.2rem, 0.6rem + 7.5vw, 3.6rem);
+  }
+  .heroStage {
+    aspect-ratio: 1 / 0.88;
+  }
+  .heroCard {
+    width: 54%;
+    left: 2%;
+    bottom: 8%;
+  }
+  .heroPhone {
+    width: 42%;
+    right: 6%;
+  }
+  .heroPhone figcaption {
+    font-size: 0.62rem;
+    padding: 5px 10px;
+  }
+  .heroDot {
+    width: 13%;
+  }
   .footerTop {
     grid-template-columns: 1fr 1fr;
   }
@@ -1146,14 +1168,6 @@
   }
   .artDotsPhone {
     width: 32%;
-  }
-  .heroPhone {
-    width: 44%;
-    right: 6%;
-  }
-  .heroPhone figcaption {
-    font-size: 0.62rem;
-    padding: 5px 10px;
   }
   .finalArt {
     max-width: 300px;
@@ -1170,18 +1184,27 @@
   .profileCallout {
     padding: 18px 20px;
   }
+  .conceptRow {
+    gap: clamp(12px, 2vw, 24px);
+  }
+  .teamsGrid {
+    gap: 32px;
+  }
+  .teamsCopy {
+    gap: 20px;
+  }
 }
 
 /* --- ≤479px — small phones --------------------------------------------- */
 @media (max-width: 479px) {
   .heroTitle {
-    font-size: clamp(2rem, 0.8rem + 7vw, 3.2rem);
+    font-size: clamp(2rem, 0.6rem + 7.5vw, 3rem);
   }
   .heroLead {
     font-size: 1rem;
   }
   .heroStage {
-    aspect-ratio: 1 / 1.05;
+    aspect-ratio: 1 / 1;
   }
   .heroCard {
     width: 56%;
