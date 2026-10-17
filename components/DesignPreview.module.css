@@ -1,0 +1,194 @@
+.wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(20px, 3vw, 40px);
+  align-items: stretch;
+}
+
+.stage {
+  position: relative;
+  border-radius: var(--r-xl);
+  min-height: 420px;
+  display: grid;
+  place-items: center;
+  padding: clamp(48px, 7vw, 90px) clamp(24px, 5vw, 64px);
+  transition: background-color var(--dur-slow) var(--ease-out);
+  overflow: hidden;
+}
+.badge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-family: var(--font-label);
+  font-size: var(--fs-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  background: var(--white);
+  color: var(--ink);
+  border-radius: var(--r-pill);
+  padding: 7px 12px;
+  box-shadow: var(--shadow-sm);
+}
+.cards {
+  position: relative;
+  width: min(100%, 440px);
+  perspective: 1400px;
+}
+.front {
+  position: relative;
+  z-index: 1;
+  transform: rotateX(8deg) rotateY(-14deg) rotateZ(-3deg);
+  transition: background-color var(--dur-slow) var(--ease-out), color var(--dur-slow) var(--ease-out);
+}
+.back {
+  position: absolute !important;
+  inset: 0;
+  transform: translate(14%, -20%) rotate(9deg) scale(0.86);
+  filter: saturate(0.92) brightness(0.96);
+  transition: background-color var(--dur-slow) var(--ease-out), color var(--dur-slow) var(--ease-out);
+}
+
+.controls {
+  display: grid;
+  align-content: start;
+  gap: 24px;
+  padding: clamp(24px, 3vw, 36px);
+  border-radius: var(--r-xl);
+  background: var(--ivory);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+.fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+.legend {
+  display: block;
+  font-family: var(--font-label);
+  font-size: var(--fs-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 12px;
+  padding: 0;
+}
+.swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.swatch {
+  position: relative;
+  cursor: pointer;
+}
+.swatch input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+.swatchChip {
+  display: block;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(14, 26, 24, 0.18);
+  transition: transform var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out);
+}
+.swatch input:checked + .swatchChip {
+  box-shadow: inset 0 0 0 1px rgba(14, 26, 24, 0.18), 0 0 0 3px var(--ivory), 0 0 0 5px var(--ink);
+}
+.swatch input:focus-visible + .swatchChip {
+  outline: 3px solid var(--cobalt);
+  outline-offset: 6px;
+}
+.swatchLabel {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+.field {
+  display: grid;
+}
+.field .legend {
+  margin-bottom: 8px;
+}
+.input {
+  min-height: 52px;
+  padding: 0 16px;
+  border-radius: var(--r-sm);
+  border: 1.5px solid var(--line-strong);
+  background: var(--white);
+  color: var(--ink);
+  font: 500 1rem/1.2 var(--font-body);
+  transition: border-color var(--dur-fast) var(--ease-out);
+}
+.input:focus-visible {
+  outline: 3px solid var(--cobalt);
+  outline-offset: 2px;
+  border-color: var(--cobalt);
+}
+.note {
+  font-size: var(--fs-small);
+  color: var(--ink-muted);
+  line-height: 1.5;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+@media (max-width: 899px) {
+  .wrap {
+    grid-template-columns: 1fr;
+  }
+  .stage {
+    min-height: 0;
+    padding-top: 80px;
+  }
+}
+
+
+/* Live preview: the cards drift gently so the design reads as a physical object. */
+@keyframes dp-tilt {
+  0%,
+  100% {
+    translate: 0 0;
+    rotate: y 0deg;
+  }
+  50% {
+    translate: 0 -10px;
+    rotate: y 8deg;
+  }
+}
+@keyframes dp-drift {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 8px -14px;
+  }
+}
+.front {
+  animation: dp-tilt 8s var(--ease-in-out) infinite;
+}
+.back {
+  animation: dp-drift 8s var(--ease-in-out) -3s infinite;
+}
+
+/* Hover only on devices that can hover (no sticky states after a tap). */
+@media (hover: hover) and (pointer: fine) {
+  .swatch:hover .swatchChip {
+    transform: scale(1.06);
+  }
+  .input:hover {
+    border-color: var(--ink-muted);
+  }
+}

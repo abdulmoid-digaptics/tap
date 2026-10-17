@@ -1,26 +1,423 @@
 @import "tailwindcss";
 
+/* ==========================================================================
+   TapGenieUS design tokens
+   ========================================================================== */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Color */
+  --ivory: #faf8f3;
+  --ivory-deep: #f2eee3;
+  --ink: #0e1a18;
+  --ink-soft: #1b2a27;
+  --ink-muted: #44524f;
+  --cobalt: #1f4bff;
+  --cobalt-strong: #1236d6;
+  --cobalt-soft: #dce4ff;
+  --tangerine: #ff6a3d;
+  --tangerine-soft: #ffd3c2;
+  --mint: #c9f4dc;
+  --mint-deep: #a8edc6;
+  --lime: #d7ff3b;
+  /* 2026 accents: Electric Fuchsia (ink text only — white fails contrast) and Digital Lavender. */
+  --fuchsia: #ff2d8d;
+  --lavender: #e7deff;
+  --violet: #6a2bff;
+  --gradient-electric: linear-gradient(120deg, #1f4bff 0%, #4a34ff 55%, #6a2bff 100%);
+  --white: #ffffff;
+  --line: rgba(14, 26, 24, 0.12);
+  --line-strong: rgba(14, 26, 24, 0.22);
+  --line-on-dark: rgba(250, 248, 243, 0.16);
+
+  /* Typography */
+  --font-display: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-label: var(--font-mono), ui-monospace, "SFMono-Regular", monospace;
+  --fs-h1: clamp(2.6rem, 1.2rem + 5vw, 5.5rem);
+  --fs-h2: clamp(2.15rem, 1.2rem + 3.3vw, 4.25rem);
+  --fs-h3: clamp(1.25rem, 1rem + 0.8vw, 1.625rem);
+  --fs-lead: clamp(1.0625rem, 0.95rem + 0.45vw, 1.3rem);
+  --fs-body: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --fs-small: 0.9375rem;
+  --fs-label: 0.8125rem;
+  --lh-tight: 0.98;
+  --lh-snug: 1.15;
+  --lh-body: 1.6;
+  --tracking-display: -0.04em;
+  --tracking-label: 0.12em;
+
+  /* Space & layout */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --gutter: clamp(1.25rem, 0.4rem + 3.6vw, 4rem);
+  --content: 1320px;
+  --section-y: clamp(3.5rem, 2rem + 5.2vw, 7.5rem);
+  --header-h: 76px;
+
+  /* Shape */
+  --r-xs: 6px;
+  --r-sm: 10px;
+  --r-md: 18px;
+  --r-lg: clamp(20px, 1rem + 1vw, 28px);
+  --r-xl: clamp(24px, 1rem + 2vw, 40px);
+  --r-pill: 999px;
+
+  /* Depth */
+  --shadow-sm: 0 1px 2px rgba(14, 26, 24, 0.08), 0 4px 12px -4px rgba(14, 26, 24, 0.12);
+  --shadow-card: 0 1px 1px rgba(14, 26, 24, 0.1), 0 12px 24px -8px rgba(14, 26, 24, 0.22),
+    0 40px 70px -28px rgba(14, 26, 24, 0.38);
+  --shadow-float: 0 2px 4px rgba(14, 26, 24, 0.08), 0 24px 48px -16px rgba(14, 26, 24, 0.32),
+    0 70px 110px -50px rgba(14, 26, 24, 0.45);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 160ms;
+  --dur: 280ms;
+  --dur-slow: 640ms;
+
+  --focus: var(--cobalt);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ==========================================================================
+   Base
+   ========================================================================== */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: var(--ivory);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+section[id],
+[id].anchor-target {
+  scroll-margin-top: calc(var(--header-h) + 16px);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: var(--tracking-display);
+  line-height: var(--lh-tight);
+  text-wrap: balance;
+  margin: 0;
+}
+/* Smaller headings wrap more often; give them a little more leading. */
+h3,
+h4 {
+  line-height: 1.08;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+::selection {
+  background: var(--lime);
+  color: var(--ink);
+}
+
+.on-dark {
+  --focus: var(--lime);
+  color: var(--ivory);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--gutter);
+  top: -100px;
+  z-index: 100;
+  background: var(--ink);
+  color: var(--ivory);
+  padding: 12px 18px;
+  border-radius: var(--r-sm);
+  font-weight: 600;
+  text-decoration: none;
+}
+.skip-link:focus {
+  top: 12px;
+}
+
+/* ==========================================================================
+   Layout primitives
+   ========================================================================== */
+.container {
+  width: 100%;
+  max-width: calc(var(--content) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: var(--section-y);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-label);
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin: 0;
+}
+.on-dark .eyebrow {
+  color: rgba(250, 248, 243, 0.72);
+}
+
+.h2 {
+  font-size: var(--fs-h2);
+}
+
+.lead {
+  font-size: var(--fs-lead);
+  line-height: 1.5;
+  color: var(--ink-muted);
+  max-width: 34em;
+}
+.on-dark .lead {
+  color: rgba(250, 248, 243, 0.78);
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+.btn {
+  --btn-bg: var(--cobalt);
+  --btn-fg: var(--white);
+  --btn-border: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 26px;
+  border-radius: var(--r-pill);
+  border: 1.5px solid var(--btn-border);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font: 600 1rem/1 var(--font-body);
+  letter-spacing: -0.005em;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color var(--dur) var(--ease-out), color var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out), transform var(--dur) var(--ease-out),
+    box-shadow var(--dur) var(--ease-out);
+}
+.btn svg {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  transition: transform var(--dur) var(--ease-out);
+}
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-secondary {
+  --btn-bg: transparent;
+  --btn-fg: var(--ink);
+  --btn-border: var(--line-strong);
+}
+.btn-lime {
+  --btn-bg: var(--lime);
+  --btn-fg: var(--ink);
+}
+.btn-outline-light {
+  --btn-bg: transparent;
+  --btn-fg: var(--ivory);
+  --btn-border: rgba(250, 248, 243, 0.4);
+}
+.btn-sm {
+  min-height: 44px;
+  padding: 0 20px;
+  font-size: 0.9375rem;
+}
+
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  background: none;
+  border: 0;
+  padding: 0;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+}
+.text-link span {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1.5px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size var(--dur) var(--ease-out);
+}
+.text-link svg {
+  width: 18px;
+  height: 18px;
+  transition: transform var(--dur) var(--ease-out);
+}
+
+/* --------------------------------------------------------------------------
+   Hover & focus
+   Hovers only apply on devices that can hover (no sticky states after a tap),
+   and keyboard focus gets the same cue so both inputs feel the same.
+   -------------------------------------------------------------------------- */
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover {
+    transform: translateY(-1px);
+  }
+  .btn:hover svg {
+    transform: translateX(3px);
+  }
+  .btn-primary:hover {
+    --btn-bg: var(--cobalt-strong);
+    box-shadow: 0 12px 26px -10px rgba(31, 75, 255, 0.65);
+  }
+  .btn-secondary:hover {
+    --btn-border: var(--ink);
+    --btn-bg: var(--ink);
+    --btn-fg: var(--ivory);
+  }
+  .btn-lime:hover {
+    --btn-bg: #e4ff7a;
+    box-shadow: 0 12px 26px -12px rgba(215, 255, 59, 0.75);
+  }
+  .btn-outline-light:hover {
+    --btn-border: var(--ivory);
+    --btn-bg: var(--ivory);
+    --btn-fg: var(--ink);
+  }
+  .text-link:hover span {
+    background-size: 100% 1.5px;
+  }
+  .text-link:hover svg {
+    transform: translateX(3px);
+  }
+  .logo-link:hover .logo-mark {
+    transform: rotate(-8deg) scale(1.06);
+  }
+  .logo-link:hover .logo-mark path {
+    animation: logo-arcs 900ms var(--ease-out);
+  }
+}
+.btn:focus-visible svg,
+.text-link:focus-visible svg {
+  transform: translateX(3px);
+}
+.text-link:focus-visible span {
+  background-size: 100% 1.5px;
+}
+
+/* Logo: the mark tilts and its signal arcs pulse once. */
+.logo-mark {
+  transition: transform var(--dur) var(--ease-out);
+}
+@keyframes logo-arcs {
+  0% {
+    opacity: 0.25;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Stretched link: a button whose hit area covers its whole card (the card needs position: relative). */
+.stretched-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  border-radius: inherit;
+}
+
+/* ==========================================================================
+   Motion
+   ========================================================================== */
+/* Reveal is an enhancement: content is only hidden once JS has marked the page ready. */
+.js-reveal [data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out);
+  transition-delay: calc(var(--reveal-delay, 0) * 1ms);
+}
+.js-reveal [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Looping scenes (marked data-anim) pause while offscreen. */
+[data-anim][data-offscreen],
+[data-anim][data-offscreen] *,
+[data-anim][data-offscreen] *::before,
+[data-anim][data-offscreen] *::after {
+  animation-play-state: paused !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+  .js-reveal [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
 }

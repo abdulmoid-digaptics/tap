@@ -1,0 +1,186 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background-color var(--dur) var(--ease-out), border-color var(--dur) var(--ease-out),
+    box-shadow var(--dur) var(--ease-out);
+}
+.scrolled {
+  background: rgba(250, 248, 243, 0.92);
+  backdrop-filter: saturate(1.4) blur(10px);
+  -webkit-backdrop-filter: saturate(1.4) blur(10px);
+  border-bottom-color: var(--line);
+}
+
+.menuOpen {
+  /* backdrop-filter would make the fixed panel position against the header */
+  background: var(--ivory);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom-color: var(--line);
+}
+
+/* Reading progress, driven by GSAP ScrollTrigger (hidden until scripts run). */
+.progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 3px;
+  background: var(--gradient-electric);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  pointer-events: none;
+}
+
+.bar {
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  text-decoration: none;
+  border-radius: 10px;
+}
+
+.desktopNav ul {
+  display: flex;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.desktopNav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: var(--r-pill);
+  font-size: 0.975rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--ink);
+  transition: background-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.toggle {
+  display: none;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line-strong);
+  background: var(--white);
+  color: var(--ink);
+  cursor: pointer;
+  transition: background-color var(--dur) var(--ease-out), color var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out);
+}
+.toggle svg {
+  width: 22px;
+  height: 22px;
+}
+
+.panel {
+  position: fixed;
+  inset: var(--header-h) 0 0;
+  background: var(--ivory);
+  padding: 24px var(--gutter) 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  overflow-y: auto;
+  border-top: 1px solid var(--line);
+}
+.panel[hidden] {
+  display: none;
+}
+.panelOpen {
+  animation: menu-in 260ms var(--ease-out) both;
+}
+.panel .btn {
+  width: 100%;
+}
+
+.mobileList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.mobileList a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 64px;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.75rem;
+  letter-spacing: -0.035em;
+  text-decoration: none;
+}
+.mobileList svg {
+  width: 22px;
+  height: 22px;
+  color: var(--cobalt);
+  transition: transform var(--dur) var(--ease-out);
+}
+
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 959px) {
+  .desktopNav {
+    display: none;
+  }
+  .toggle {
+    display: grid;
+  }
+}
+
+@media (max-width: 479px) {
+  .cta {
+    display: none;
+  }
+}
+
+/* Hover only on devices that can hover (no sticky states after a tap). */
+@media (hover: hover) and (pointer: fine) {
+  .desktopNav a:hover {
+    background: rgba(14, 26, 24, 0.06);
+    color: var(--cobalt);
+  }
+  .toggle:hover {
+    border-color: var(--ink);
+    background: var(--ink);
+    color: var(--ivory);
+  }
+  .mobileList a:hover {
+    color: var(--cobalt);
+  }
+  .mobileList a:hover svg {
+    transform: translateX(4px);
+  }
+}

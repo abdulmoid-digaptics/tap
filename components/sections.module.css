@@ -1,0 +1,1685 @@
+/* ==========================================================================
+   Shared section header
+   ========================================================================== */
+.head {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 24px clamp(32px, 6vw, 96px);
+  align-items: end;
+  margin-bottom: clamp(36px, 5vw, 72px);
+}
+.headStack {
+  grid-template-columns: 1fr;
+}
+.headTitle {
+  display: grid;
+  gap: 18px;
+}
+.head .lead {
+  padding-bottom: 6px;
+}
+.eyebrowSignal {
+  width: 16px;
+  height: 16px;
+  color: var(--cobalt);
+  stroke-width: 2;
+}
+.eyebrowSignalLime {
+  width: 16px;
+  height: 16px;
+  color: var(--lime);
+  stroke-width: 2;
+}
+
+/* ==========================================================================
+   Hero
+   ========================================================================== */
+.hero {
+  padding-top: clamp(1.5rem, 1rem + 3vw, 4rem);
+  padding-bottom: clamp(48px, 6vw, 96px);
+  overflow: clip;
+}
+.heroGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 45fr) minmax(0, 55fr);
+  gap: clamp(24px, 4vw, 64px);
+  align-items: center;
+}
+.heroCopy {
+  display: grid;
+  justify-items: start;
+  gap: 26px;
+  padding-block: 24px;
+}
+.heroCopy > * {
+  animation: hero-rise 700ms var(--ease-out) both;
+}
+.heroCopy > :nth-child(2) {
+  animation-delay: 60ms;
+}
+.heroCopy > :nth-child(3) {
+  animation-delay: 140ms;
+}
+.heroCopy > :nth-child(4) {
+  animation-delay: 200ms;
+}
+.heroCopy > :nth-child(5) {
+  animation-delay: 260ms;
+}
+.heroEyebrow {
+  color: var(--ink);
+}
+.heroTitle {
+  font-size: var(--fs-h1);
+  line-height: 0.95;
+  letter-spacing: -0.048em;
+}
+.heroTitle span {
+  display: block;
+}
+.heroTitle span:last-child {
+  color: var(--cobalt);
+  /* electric blue → violet; both ends keep ≥5:1 contrast on ivory */
+  background: var(--gradient-electric);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding-bottom: 0.06em;
+  display: inline-block;
+}
+.heroLead {
+  max-width: 31rem;
+}
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.heroNote {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--fs-small);
+  color: var(--ink-muted);
+}
+.heroNote svg {
+  width: 18px;
+  height: 18px;
+  color: var(--cobalt);
+  stroke-width: 2;
+}
+
+.heroStage {
+  position: relative;
+  aspect-ratio: 1 / 0.94;
+  width: 100%;
+}
+.stagePanel {
+  position: absolute;
+  inset: 0 0 0 7%;
+  border-radius: var(--r-xl);
+  background: var(--mint);
+  overflow: hidden;
+  animation: stage-rise 900ms var(--ease-out) both;
+}
+.stageSun {
+  position: absolute;
+  width: 74%;
+  aspect-ratio: 1;
+  right: -16%;
+  top: -18%;
+  border-radius: 50%;
+  background: var(--tangerine);
+}
+.stageArc {
+  position: absolute;
+  width: 120%;
+  aspect-ratio: 1;
+  left: -52%;
+  bottom: -80%;
+  border-radius: 50%;
+  border: 1.5px solid rgba(14, 26, 24, 0.14);
+  box-shadow: 0 0 0 40px rgba(255, 255, 255, 0.16), 0 0 0 41.5px rgba(14, 26, 24, 0.08);
+}
+.heroPhone {
+  position: absolute;
+  width: 39%;
+  right: 9%;
+  top: 7%;
+  transform: rotate(4deg);
+  animation: stage-rise 900ms var(--ease-out) 140ms both;
+}
+.heroCard {
+  position: absolute;
+  width: 52%;
+  left: 0;
+  bottom: 6%;
+  perspective: 1200px;
+  z-index: 2;
+  animation: stage-rise 1000ms var(--ease-out) 300ms both;
+}
+.heroCard > * {
+  transform: rotateX(8deg) rotateY(-12deg) rotateZ(-8deg);
+  animation: card-tap 8s var(--ease-in-out) infinite;
+}
+.heroRings {
+  width: 13%;
+  left: 40%;
+  bottom: 36%;
+  z-index: 1;
+}
+.heroDot {
+  position: absolute;
+  width: 12%;
+  right: 3%;
+  bottom: 7%;
+  z-index: 2;
+  transform: rotate(-12deg);
+  animation: stage-rise 900ms var(--ease-out) 420ms both, dot-bob 5s ease-in-out 1.4s infinite;
+}
+
+/* ==========================================================================
+   Capability strip
+   ========================================================================== */
+.strip {
+  border-block: 1px solid var(--line);
+  background: var(--ivory);
+}
+.stripList {
+  list-style: none;
+  margin-block: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.stripList > li {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 28px 24px 28px 0;
+}
+.stripList > li + li {
+  padding-left: 24px;
+  border-left: 1px solid var(--line);
+}
+.stripList strong {
+  display: block;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+.stripText {
+  display: block;
+  font-size: var(--fs-small);
+  color: var(--ink-muted);
+  line-height: 1.45;
+  margin-top: 4px;
+}
+.stripIcon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--white);
+  box-shadow: inset 0 0 0 1px var(--line);
+  color: var(--cobalt);
+}
+.stripIcon svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* ==========================================================================
+   How it works
+   ========================================================================== */
+.steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2.4vw, 32px);
+}
+.step {
+  display: grid;
+  gap: 26px;
+  align-content: start;
+}
+.stepVisual {
+  position: relative;
+  aspect-ratio: 4 / 3.3;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+.stepVisualSetup {
+  background: var(--ivory-deep);
+}
+.stepVisualTap {
+  background: var(--mint);
+}
+.stepVisualNext {
+  background: var(--tangerine);
+}
+.stepMeta {
+  display: grid;
+  gap: 12px;
+}
+.stepNumber {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-label);
+  font-size: var(--fs-label);
+  letter-spacing: var(--tracking-label);
+  color: var(--cobalt);
+}
+.stepNumber::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: repeating-linear-gradient(90deg, var(--line-strong) 0 6px, transparent 6px 12px);
+}
+.step:last-child .stepNumber::after {
+  background: var(--line);
+}
+.stepTitle {
+  font-size: var(--fs-h3);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+.stepText {
+  color: var(--ink-muted);
+  max-width: 34ch;
+}
+
+/* step 1 — illustrative profile editor */
+.editor {
+  width: 72%;
+  display: grid;
+  gap: 8px;
+  padding: 18px;
+  border-radius: var(--r-md);
+  background: var(--white);
+  box-shadow: var(--shadow-card);
+  font-size: 0.8rem;
+  transform: rotate(-2deg);
+}
+.editorTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 650;
+  font-size: 0.875rem;
+  margin-bottom: 4px;
+}
+.editorTitle svg {
+  width: 16px;
+  height: 16px;
+  color: var(--cobalt);
+}
+.editorField {
+  display: grid;
+  gap: 1px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+.editorField span:first-child {
+  font-size: 0.68rem;
+  color: var(--ink-muted);
+}
+.editorField span:last-child {
+  font-weight: 600;
+}
+.editorToggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 2px 0;
+  font-weight: 500;
+}
+.toggleOn {
+  position: relative;
+  width: 34px;
+  height: 20px;
+  border-radius: 99px;
+  background: var(--cobalt);
+}
+.toggleOn::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--white);
+}
+
+/* step 2 — tap */
+.tapPhone {
+  position: absolute;
+  width: 32%;
+  right: 16%;
+  top: 9%;
+  transform: rotate(5deg);
+}
+.tapCard {
+  position: absolute;
+  width: 50%;
+  left: 10%;
+  bottom: 12%;
+  transform: rotate(-10deg);
+  z-index: 2;
+}
+.tapRings {
+  width: 16%;
+  left: 46%;
+  top: 44%;
+  z-index: 1;
+}
+
+/* step 3 — next actions */
+.nextList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 72%;
+  display: grid;
+  gap: 10px;
+}
+.nextList li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: var(--r-md);
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.nextList li:nth-child(2) {
+  transform: translateX(8%);
+}
+.nextHighlight {
+  background: var(--ink) !important;
+  color: var(--ivory);
+}
+.nextIcon {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: var(--mint);
+  color: var(--ink);
+  flex: none;
+}
+.nextHighlight .nextIcon {
+  background: var(--lime);
+}
+.nextIcon svg {
+  width: 17px;
+  height: 17px;
+}
+.nextCheck {
+  width: 18px;
+  height: 18px;
+  margin-left: auto;
+  color: var(--cobalt);
+  stroke-width: 2.2;
+}
+
+/* ==========================================================================
+   Products
+   ========================================================================== */
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: clamp(40px, 5vw, 64px) clamp(16px, 2.4vw, 32px);
+}
+.product {
+  position: relative; /* the View details button stretches over the whole tile */
+  display: grid;
+  gap: 24px;
+  align-content: start;
+}
+.product0,
+.product3 {
+  grid-column: span 7;
+}
+.product1,
+.product2 {
+  grid-column: span 5;
+}
+.productStage {
+  position: relative;
+  transition: box-shadow var(--dur-slow) var(--ease-out), translate var(--dur-slow) var(--ease-out);
+  height: clamp(280px, 30vw, 440px);
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+.productStage > * {
+  transition: transform 900ms var(--ease-out);
+}
+.productStage[data-tone="tangerine"] {
+  background: var(--tangerine);
+}
+.productStage[data-tone="mint"] {
+  background: var(--mint);
+}
+.productStage[data-tone="cobalt"] {
+  background: var(--cobalt);
+}
+.productStage[data-tone="fuchsia"] {
+  background: var(--fuchsia);
+}
+.productStage[data-tone="ink"] {
+  background: var(--ink);
+}
+.productMeta {
+  display: grid;
+  justify-items: start;
+  gap: 8px;
+}
+.productKicker {
+  font-family: var(--font-label);
+  font-size: var(--fs-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.productName {
+  font-size: var(--fs-h3);
+  letter-spacing: -0.03em;
+  transition: color var(--dur) var(--ease-out);
+}
+.productSummary {
+  color: var(--ink-muted);
+  max-width: 44ch;
+}
+
+.artCards {
+  position: relative;
+  width: min(56%, 380px);
+  margin-top: 6%;
+  perspective: 1400px;
+}
+.artCardFront {
+  position: relative;
+  z-index: 1;
+  transform: rotateX(8deg) rotateY(-12deg) rotateZ(-8deg);
+}
+.artCardBack {
+  position: absolute !important;
+  inset: 0;
+  transform: translate(22%, -18%) rotate(9deg);
+}
+.artDots {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.artDotsPhone {
+  position: absolute;
+  width: min(30%, 150px);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -48%) rotate(10deg);
+}
+.artDotsLoose {
+  position: absolute;
+  width: min(16%, 80px);
+  left: 16%;
+  bottom: 14%;
+  transform: rotate(-14deg);
+}
+.artBands {
+  width: min(72%, 380px);
+}
+.artBand {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 24px 30px rgba(10, 20, 60, 0.35));
+  transform: rotate(-6deg);
+}
+.artDisplay {
+  width: min(32%, 220px);
+}
+.artDisplayUnit {
+  transform: perspective(900px) rotateY(-12deg);
+}
+
+.dialogLabel {
+  font-family: var(--font-label);
+  font-size: var(--fs-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 8px !important;
+}
+.dialogList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+.dialogList li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.dialogList svg {
+  width: 18px;
+  height: 18px;
+  color: var(--cobalt);
+  stroke-width: 2.2;
+  flex: none;
+}
+.dialogNote {
+  font-size: var(--fs-small);
+  color: var(--ink-muted);
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+/* ==========================================================================
+   Profile feature
+   ========================================================================== */
+.profile {
+  background: var(--mint);
+}
+.profileGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(40px, 7vw, 120px);
+  align-items: center;
+}
+.profileVisual {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  padding-block: 20px;
+}
+.profilePhone {
+  position: relative;
+  width: min(320px, 66%);
+}
+.callouts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.callouts li {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-label);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  z-index: 5;
+}
+.callouts li::before,
+.callouts li::after {
+  content: "";
+  display: block;
+}
+.callouts li::before {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--cobalt);
+  order: 2;
+}
+.callouts li::after {
+  width: 28px;
+  height: 1px;
+  background: var(--ink);
+  order: 1;
+}
+.callout1 {
+  right: calc(100% - 22px);
+  top: 50%;
+}
+.callout2 {
+  left: calc(100% - 22px);
+  top: 62%;
+  flex-direction: row-reverse;
+}
+.callout3 {
+  right: calc(100% - 22px);
+  top: 84%;
+}
+.profileCopy {
+  display: grid;
+  gap: 32px;
+}
+.profileCopy > :first-child {
+  display: grid;
+  gap: 18px;
+}
+.profileLead {
+  max-width: 32rem;
+}
+.featureList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px 32px;
+}
+.featureList li {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.featureList strong {
+  display: block;
+  font-weight: 650;
+  line-height: 1.3;
+}
+.featureList li > span:last-child > span {
+  display: block;
+  color: var(--ink-muted);
+  font-size: var(--fs-small);
+  line-height: 1.5;
+  margin-top: 4px;
+}
+.featureIcon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: var(--white);
+  color: var(--cobalt);
+}
+.featureIcon svg {
+  width: 22px;
+  height: 22px;
+}
+.profileCallout {
+  max-width: 34rem;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 22px 24px;
+  border-radius: var(--r-lg);
+  background: var(--ink);
+  color: rgba(250, 248, 243, 0.8);
+  font-size: var(--fs-small);
+  line-height: 1.55;
+}
+.profileCallout strong {
+  display: block;
+  color: var(--ivory);
+  font-size: 1.05rem;
+  margin-bottom: 4px;
+}
+.profileCallout svg {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  color: var(--lime);
+}
+
+/* ==========================================================================
+   Brand customization
+   ========================================================================== */
+.brand {
+  background: var(--white);
+  /* the concept row drifts sideways on scroll; keep it inside the section */
+  overflow-x: clip;
+}
+.concepts {
+  margin-top: clamp(48px, 6vw, 88px);
+}
+.conceptsLabel {
+  font-family: var(--font-label);
+  font-size: var(--fs-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  padding-bottom: 16px;
+  margin-bottom: clamp(24px, 3vw, 40px);
+  border-bottom: 1px solid var(--line);
+}
+.conceptRow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(16px, 2.4vw, 32px);
+}
+/* Concepts are illustrations, not links: no hover cue. */
+.concept:nth-child(odd) {
+  transform: rotate(-3deg);
+}
+.concept:nth-child(even) {
+  transform: rotate(2.5deg) translateY(12px);
+}
+
+/* ==========================================================================
+   Teams
+   ========================================================================== */
+.teams {
+  background: var(--ink);
+  overflow: clip;
+}
+.teamsGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(40px, 7vw, 120px);
+  align-items: center;
+}
+.teamsCopy {
+  display: grid;
+  justify-items: start;
+  gap: 24px;
+}
+.teamsCopy h2 {
+  color: var(--ivory);
+}
+.teamsList {
+  list-style: none;
+  margin: 0 0 8px;
+  padding: 0;
+  display: grid;
+  gap: 2px;
+  width: 100%;
+}
+.teamsList li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line-on-dark);
+  font-weight: 500;
+}
+.teamsList svg {
+  width: 20px;
+  height: 20px;
+  color: var(--lime);
+  stroke-width: 2.2;
+  flex: none;
+}
+.teamsArt {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(12px, 1.6vw, 22px);
+  /* rotate (not transform) so the scroll-reveal transform does not cancel the tilt */
+  rotate: -6deg;
+  padding: 28px 0;
+}
+.teamCard:nth-child(3n + 2) {
+  transform: translateY(26%);
+}
+.teamCardNew {
+  box-shadow: 0 0 0 2px var(--ink), 0 0 0 4px var(--lime), var(--shadow-card);
+}
+
+/* ==========================================================================
+   FAQ
+   ========================================================================== */
+.faqGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+  gap: clamp(32px, 6vw, 112px);
+  align-items: start;
+}
+.faqIntro {
+  display: grid;
+  justify-items: start;
+  gap: 18px;
+  position: sticky;
+  top: calc(var(--header-h) + 32px);
+}
+
+/* ==========================================================================
+   Final CTA
+   ========================================================================== */
+.final {
+  background: var(--gradient-electric);
+  overflow: clip;
+  padding-block: clamp(4.5rem, 2.6rem + 6vw, 9rem);
+}
+.finalGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(40px, 6vw, 96px);
+  align-items: center;
+}
+.finalCopy {
+  display: grid;
+  justify-items: start;
+  gap: 26px;
+}
+.finalTitle {
+  font-size: clamp(2.6rem, 1.4rem + 4.6vw, 5.75rem);
+  line-height: 0.96;
+  letter-spacing: -0.048em;
+  color: var(--white);
+  max-width: 11ch;
+}
+.finalLead {
+  font-size: var(--fs-lead);
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.86);
+  max-width: 30rem;
+}
+.finalArt {
+  position: relative;
+  aspect-ratio: 1;
+  width: 100%;
+  max-width: 520px;
+  justify-self: center;
+}
+.finalRings {
+  position: absolute;
+  inset: 0;
+}
+.finalRings span {
+  position: absolute;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.22);
+}
+.finalRings span:nth-child(1) {
+  inset: 30%;
+  border-color: rgba(215, 255, 59, 0.7);
+}
+.finalRings span:nth-child(2) {
+  inset: 15%;
+}
+.finalRings span:nth-child(3) {
+  inset: 0;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+.finalCardA,
+.finalCardB {
+  position: absolute !important;
+  width: 66% !important;
+  left: 17%;
+}
+.finalCardA {
+  top: 26%;
+  transform: rotate(-14deg);
+  z-index: 2;
+}
+.finalCardB {
+  top: 40%;
+  transform: rotate(9deg) translateX(8%);
+  z-index: 1;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.footer {
+  background: var(--ink);
+  padding-top: clamp(56px, 6vw, 88px);
+  padding-bottom: 32px;
+  font-size: var(--fs-small);
+}
+.footerTop {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: 40px clamp(24px, 4vw, 64px);
+  padding-bottom: clamp(40px, 5vw, 64px);
+}
+.footerBrand {
+  display: grid;
+  gap: 18px;
+  align-content: start;
+}
+.footerBrand p {
+  color: rgba(250, 248, 243, 0.72);
+  max-width: 36ch;
+  line-height: 1.6;
+}
+.footerLogo {
+  display: inline-flex;
+  align-self: start;
+  justify-self: start;
+  min-height: 44px;
+  align-items: center;
+  text-decoration: none;
+}
+.footerHeading {
+  font-family: var(--font-label);
+  font-size: var(--fs-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: rgba(250, 248, 243, 0.55);
+  margin-bottom: 12px;
+}
+.footerCol ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.footerCol a,
+.footerBottom a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: rgba(250, 248, 243, 0.86);
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.footerText {
+  color: rgba(250, 248, 243, 0.72);
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+.footerBottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line-on-dark);
+  color: rgba(250, 248, 243, 0.6);
+}
+.footerBottom ul {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+@media (max-width: 1099px) {
+  .callouts {
+    display: none;
+  }
+  .footerTop {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .footerBrand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 1023px) {
+  .stripList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .stripList > li:nth-child(3) {
+    padding-left: 0;
+    border-left: 0;
+  }
+  .stripList > li:nth-child(n + 3) {
+    border-top: 1px solid var(--line);
+  }
+  .steps {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .step {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 32px;
+  }
+  .featureList {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 899px) {
+  .head {
+    grid-template-columns: 1fr;
+  }
+  .heroGrid {
+    grid-template-columns: 1fr;
+  }
+  .heroCopy {
+    padding-block: 8px 0;
+  }
+  .heroStage {
+    max-width: 600px;
+    justify-self: center;
+  }
+  .stagePanel {
+    inset: 0;
+  }
+  .heroCard {
+    left: 4%;
+  }
+  .product0,
+  .product1,
+  .product2,
+  .product3 {
+    grid-column: 1 / -1;
+  }
+  .productStage {
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
+  .profileGrid,
+  .teamsGrid,
+  .faqGrid,
+  .finalGrid {
+    grid-template-columns: 1fr;
+  }
+  .profileVisual {
+    order: 2;
+  }
+  .faqIntro {
+    position: static;
+  }
+  .teamsArt {
+    max-width: 600px;
+    justify-self: center;
+    width: 100%;
+  }
+  .finalArt {
+    max-width: 380px;
+  }
+  .conceptRow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 40px;
+  }
+}
+
+@media (max-width: 639px) {
+  .stripList {
+    grid-template-columns: 1fr;
+  }
+  .stripList > li,
+  .stripList > li + li {
+    padding: 20px 0;
+    border-left: 0;
+  }
+  .stripList > li + li {
+    border-top: 1px solid var(--line);
+  }
+  .step {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .heroActions {
+    width: 100%;
+  }
+  .heroActions > a {
+    flex: 1 1 100%;
+  }
+  .footerTop {
+    grid-template-columns: 1fr 1fr;
+  }
+  .footerTop > :last-child {
+    grid-column: 1 / -1;
+  }
+  .artDisplay {
+    width: 40%;
+  }
+  .artDotsPhone {
+    width: 32%;
+  }
+  .heroPhone {
+    width: 44%;
+    right: 6%;
+  }
+  .heroPhone figcaption {
+    font-size: 0.62rem;
+    padding: 5px 10px;
+  }
+  .finalArt {
+    max-width: 300px;
+  }
+  .teamsArt {
+    padding-inline: 4%;
+  }
+}
+
+
+/* ==========================================================================
+   Live scenes
+   Loops animate the individual translate / rotate / scale properties so the
+   static composition (set with transform) is untouched. Keyframes are local
+   to this module. Scenes pause offscreen and via the page's pause control.
+   ========================================================================== */
+/* The headline is the largest paint: it rises without fading so it renders immediately. */
+.heroCopy > .heroTitle {
+  animation-name: hero-move;
+}
+@keyframes hero-move {
+  from {
+    translate: 0 14px;
+  }
+  to {
+    translate: 0 0;
+  }
+}
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    translate: 0 18px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+@keyframes stage-rise {
+  from {
+    opacity: 0;
+    translate: 0 28px;
+    scale: 0.98;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+    scale: 1;
+  }
+}
+
+/* The tap: a card moves to the phone, touches, and returns (8s, synced with the phone screen). */
+@keyframes card-tap {
+  0%,
+  14% {
+    translate: 0 0;
+    rotate: 0deg;
+  }
+  29% {
+    translate: 20% -16%;
+    rotate: 5deg;
+  }
+  33% {
+    translate: 22% -18%;
+    rotate: 5deg;
+  }
+  44% {
+    translate: 20% -16%;
+    rotate: 5deg;
+  }
+  62%,
+  100% {
+    translate: 0 0;
+    rotate: 0deg;
+  }
+}
+@keyframes tap-ring {
+  0%,
+  29% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  35% {
+    opacity: 0.95;
+  }
+  58%,
+  100% {
+    opacity: 0;
+    transform: scale(1.3);
+  }
+}
+@keyframes soft-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -8px;
+  }
+}
+@keyframes float-a {
+  0%,
+  100% {
+    translate: 0 0;
+    rotate: 0deg;
+  }
+  50% {
+    translate: 0 -12px;
+    rotate: -2deg;
+  }
+}
+@keyframes float-b {
+  0%,
+  100% {
+    translate: 0 0;
+    rotate: 0deg;
+  }
+  50% {
+    translate: 6px -16px;
+    rotate: 3deg;
+  }
+}
+@keyframes dot-bob {
+  0%,
+  100% {
+    translate: 0 0;
+    rotate: 0deg;
+  }
+  50% {
+    translate: 0 -10px;
+    rotate: 10deg;
+  }
+}
+@keyframes breathe {
+  0%,
+  100% {
+    scale: 1;
+  }
+  50% {
+    scale: 1.05;
+  }
+}
+
+/* Hero ------------------------------------------------------------------ */
+.heroStage .heroRings span {
+  animation: tap-ring 8s var(--ease-out) infinite;
+}
+.heroStage .heroRings span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.heroStage .heroRings span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.heroPhone > figure {
+  animation: soft-float 8s var(--ease-in-out) infinite;
+}
+.stageSun {
+  animation: breathe 8s var(--ease-in-out) infinite;
+}
+
+/* How it works ---------------------------------------------------------- */
+.editor {
+  animation: soft-float 7s var(--ease-in-out) infinite;
+}
+.editorTyping {
+  display: inline-block;
+  animation: editor-type 6s steps(16, end) infinite;
+}
+@keyframes editor-type {
+  0%,
+  12% {
+    clip-path: inset(0 100% 0 0);
+  }
+  52%,
+  92% {
+    clip-path: inset(0 0 0 0);
+  }
+  100% {
+    clip-path: inset(0 100% 0 0);
+  }
+}
+.toggleOn {
+  animation: toggle-bg 6s var(--ease-out) infinite;
+}
+.toggleOn::after {
+  animation: toggle-knob 6s var(--ease-out) infinite;
+}
+@keyframes toggle-bg {
+  0%,
+  56% {
+    background: #b9c2bf;
+  }
+  62%,
+  96% {
+    background: var(--cobalt);
+  }
+  100% {
+    background: #b9c2bf;
+  }
+}
+@keyframes toggle-knob {
+  0%,
+  56% {
+    translate: -14px 0;
+  }
+  62%,
+  96% {
+    translate: 0 0;
+  }
+  100% {
+    translate: -14px 0;
+  }
+}
+
+.tapCard {
+  animation: step-tap 8s var(--ease-in-out) infinite;
+}
+@keyframes step-tap {
+  0%,
+  14% {
+    translate: 0 0;
+    rotate: 0deg;
+  }
+  29% {
+    translate: 24% -30%;
+    rotate: 6deg;
+  }
+  33% {
+    translate: 26% -32%;
+    rotate: 6deg;
+  }
+  44% {
+    translate: 24% -30%;
+    rotate: 6deg;
+  }
+  62%,
+  100% {
+    translate: 0 0;
+    rotate: 0deg;
+  }
+}
+.stepVisualTap .tapRings span {
+  animation: tap-ring 8s var(--ease-out) infinite;
+}
+.stepVisualTap .tapRings span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.stepVisualTap .tapRings span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.tapPhone > figure {
+  animation: soft-float 8s var(--ease-in-out) infinite;
+}
+
+.nextList li {
+  animation: list-in 8s var(--ease-out) infinite;
+}
+.nextList li:nth-child(2) {
+  animation-delay: 0.35s;
+}
+.nextList li.nextHighlight {
+  animation: list-in 8s var(--ease-out) 0.7s infinite, press-soft 8s ease 0.7s infinite;
+}
+@keyframes list-in {
+  0%,
+  6% {
+    opacity: 0;
+    translate: 0 12px;
+  }
+  14%,
+  86% {
+    opacity: 1;
+    translate: 0 0;
+  }
+  94%,
+  100% {
+    opacity: 0;
+    translate: 0 -6px;
+  }
+}
+@keyframes press-soft {
+  0%,
+  50% {
+    scale: 1;
+  }
+  54% {
+    scale: 0.96;
+  }
+  60%,
+  100% {
+    scale: 1;
+  }
+}
+.nextCheck path {
+  stroke-dasharray: 20;
+  animation: check-draw 8s var(--ease-out) infinite;
+}
+@keyframes check-draw {
+  0%,
+  16% {
+    stroke-dashoffset: 20;
+  }
+  26%,
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Products -------------------------------------------------------------- */
+.artCardFront {
+  animation: float-a 7s var(--ease-in-out) infinite;
+}
+.artCardBack {
+  animation: float-b 7s var(--ease-in-out) -2s infinite;
+}
+.artDotsPhone {
+  animation: float-a 8s var(--ease-in-out) infinite;
+}
+.artDotsLoose {
+  animation: dot-roll 8s var(--ease-in-out) infinite;
+}
+@keyframes dot-roll {
+  0%,
+  100% {
+    translate: 0 0;
+    rotate: 0deg;
+  }
+  50% {
+    translate: 24px -8px;
+    rotate: 45deg;
+  }
+}
+.artBand {
+  animation: band-sway 6s var(--ease-in-out) infinite;
+}
+@keyframes band-sway {
+  0%,
+  100% {
+    translate: 0 0;
+    rotate: 0deg;
+  }
+  50% {
+    translate: 0 -12px;
+    rotate: 5deg;
+  }
+}
+.artDisplayUnit {
+  animation: display-turn 9s var(--ease-in-out) infinite;
+}
+@keyframes display-turn {
+  0%,
+  100% {
+    rotate: y 0deg;
+    translate: 0 0;
+  }
+  50% {
+    rotate: y 10deg;
+    translate: 0 -8px;
+  }
+}
+
+/* Digital profile ------------------------------------------------------- */
+.profilePhone > figure {
+  animation: soft-float 9s var(--ease-in-out) infinite;
+}
+.callouts li::before {
+  animation: callout-ping 2.4s var(--ease-out) infinite;
+}
+.callouts li:nth-child(2)::before {
+  animation-delay: 0.8s;
+}
+.callouts li:nth-child(3)::before {
+  animation-delay: 1.6s;
+}
+@keyframes callout-ping {
+  0% {
+    box-shadow: 0 0 0 0 rgba(31, 75, 255, 0.5);
+  }
+  70%,
+  100% {
+    box-shadow: 0 0 0 9px rgba(31, 75, 255, 0);
+  }
+}
+
+/* Brand concepts -------------------------------------------------------- */
+.concept:nth-child(odd) {
+  animation: float-a 7s var(--ease-in-out) infinite;
+}
+.concept:nth-child(even) {
+  animation: float-b 7s var(--ease-in-out) -3.5s infinite;
+}
+
+/* Teams ----------------------------------------------------------------- */
+.teamCard {
+  animation: soft-float 6s var(--ease-in-out) infinite;
+}
+.teamCard:nth-child(2) {
+  animation-delay: -1s;
+}
+.teamCard:nth-child(3) {
+  animation-delay: -2s;
+}
+.teamCard:nth-child(4) {
+  animation-delay: -3s;
+}
+.teamCard:nth-child(5) {
+  animation-delay: -4s;
+}
+.teamCardNew {
+  animation: teammate-join 8s var(--ease-out) infinite;
+}
+@keyframes teammate-join {
+  0%,
+  8% {
+    opacity: 0;
+    translate: 0 36px;
+    scale: 0.9;
+  }
+  20%,
+  84% {
+    opacity: 1;
+    translate: 0 0;
+    scale: 1;
+  }
+  94%,
+  100% {
+    opacity: 0;
+    translate: 0 -12px;
+    scale: 1;
+  }
+}
+
+/* Final CTA ------------------------------------------------------------- */
+.finalRings span {
+  animation: ring-breathe 6s var(--ease-in-out) infinite;
+}
+.finalRings span:nth-child(2) {
+  animation-delay: -2s;
+}
+.finalRings span:nth-child(3) {
+  animation-delay: -4s;
+}
+@keyframes ring-breathe {
+  0%,
+  100% {
+    scale: 1;
+    opacity: 1;
+  }
+  50% {
+    scale: 1.06;
+    opacity: 0.45;
+  }
+}
+.finalCardA {
+  animation: float-a 8s var(--ease-in-out) infinite;
+}
+.finalCardB {
+  animation: float-b 8s var(--ease-in-out) -4s infinite;
+}
+
+/* ==========================================================================
+   Spacing & sizing refinements
+   ========================================================================== */
+/* Products follows How it works on the same background: avoid a doubled gap. */
+.sectionTight {
+  padding-top: calc(var(--section-y) * 0.4);
+}
+
+/* Tablet: use the width instead of stacking everything in one column. */
+@media (min-width: 640px) and (max-width: 899px) {
+  .product0,
+  .product1,
+  .product2,
+  .product3 {
+    grid-column: span 6;
+  }
+  .productStage {
+    aspect-ratio: 1 / 0.9;
+  }
+  .featureList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .artDisplay {
+    width: 44%;
+  }
+}
+
+/* Phones: two larger columns of team cards instead of three tiny ones. */
+@media (max-width: 639px) {
+  .teamsArt {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    padding-inline: 2%;
+  }
+  .teamCard:nth-child(3n + 2) {
+    transform: none;
+  }
+  .teamCard:nth-child(2n) {
+    transform: translateY(22%);
+  }
+}
+
+/* Hover only on devices that can hover (no sticky states after a tap). */
+@media (hover: hover) and (pointer: fine) {
+  /* Product tile: the whole tile opens its details, so the whole tile responds. */
+  .product:hover .productStage {
+    translate: 0 -4px;
+    box-shadow: 0 26px 50px -30px rgba(14, 26, 24, 0.55);
+  }
+  .product:hover .productStage > * {
+    transform: scale(1.04) translateY(-4px);
+  }
+  .product:hover .productName {
+    color: var(--cobalt);
+  }
+  .product:hover :global(.text-link) span {
+    background-size: 100% 1.5px;
+  }
+  .product:hover :global(.text-link) svg {
+    transform: translateX(3px);
+  }
+
+  .footerCol a:hover,
+  .footerBottom a:hover {
+    color: var(--lime);
+    background-size: 100% 1px;
+  }
+}
+
+/* Keyboard focus on a tile's button gives the same cue as hovering the tile. */
+.product:has(:focus-visible) .productStage {
+  translate: 0 -4px;
+  box-shadow: 0 26px 50px -30px rgba(14, 26, 24, 0.55);
+}
+.product:has(:focus-visible) .productName {
+  color: var(--cobalt);
+}
+
+/* Footer links: an underline grows on hover. */
+.footerCol a,
+.footerBottom a {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 78%;
+  background-repeat: no-repeat;
+  transition: color var(--dur-fast) var(--ease-out), background-size var(--dur) var(--ease-out);
+}
