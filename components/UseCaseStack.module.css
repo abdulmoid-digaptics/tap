@@ -358,6 +358,57 @@
     padding: 6% 5%;
     gap: 4%;
   }
+  .title {
+    font-size: clamp(1.25rem, 0.9rem + 2vw, 1.7rem);
+  }
+  .text {
+    font-size: 0.9375rem;
+  }
+  .panel {
+    padding: 10px 10px 16px;
+    border-radius: var(--r-lg);
+  }
+  .visual {
+    border-radius: calc(var(--r-lg) - 4px);
+  }
+}
+
+@media (max-width: 479px) {
+  .visual {
+    aspect-ratio: 16 / 10;
+    max-height: 36svh;
+  }
+  .copy {
+    padding: 0 4px;
+    gap: 8px;
+  }
+  .meta {
+    font-size: 0.7rem;
+  }
+  .index {
+    min-height: 24px;
+    padding: 0 8px;
+    font-size: 0.7rem;
+  }
+  .sceneTeam > * {
+    width: 52%;
+  }
+  .agencyLabel {
+    font-size: 0.6rem;
+  }
+}
+
+@media (max-width: 359px) {
+  .visual {
+    aspect-ratio: 16 / 9;
+    max-height: 30svh;
+  }
+  .title {
+    font-size: 1.15rem;
+  }
+  .panel {
+    padding: 8px 8px 14px;
+  }
 }
 
 /* Very short viewports: pinning would hide content, so panels simply flow. */

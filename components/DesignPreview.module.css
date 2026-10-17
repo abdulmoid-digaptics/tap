@@ -154,6 +154,49 @@
   }
 }
 
+@media (max-width: 479px) {
+  .stage {
+    padding: 60px 16px 32px;
+    border-radius: var(--r-lg);
+  }
+  .controls {
+    padding: 20px;
+    gap: 18px;
+    border-radius: var(--r-lg);
+  }
+  .badge {
+    top: 14px;
+    left: 14px;
+    font-size: 0.7rem;
+  }
+  .swatchChip {
+    width: 40px;
+    height: 40px;
+  }
+  .input {
+    min-height: 46px;
+    padding: 0 12px;
+    font-size: 0.9375rem;
+  }
+  .note {
+    font-size: 0.8125rem;
+  }
+}
+
+@media (max-width: 359px) {
+  .stage {
+    padding: 52px 12px 24px;
+  }
+  .controls {
+    padding: 16px;
+    gap: 14px;
+  }
+  .swatchChip {
+    width: 34px;
+    height: 34px;
+  }
+}
+
 
 /* Live preview: the cards drift gently so the design reads as a physical object. */
 @keyframes dp-tilt {

@@ -164,6 +164,29 @@
   .cta {
     display: none;
   }
+  .mobileList a {
+    font-size: 1.4rem;
+    min-height: 56px;
+  }
+  .panel {
+    padding: 20px var(--gutter) 32px;
+    gap: 22px;
+  }
+}
+
+@media (max-width: 359px) {
+  .mobileList a {
+    font-size: 1.2rem;
+    min-height: 50px;
+  }
+  .toggle {
+    width: 42px;
+    height: 42px;
+  }
+  .toggle svg {
+    width: 18px;
+    height: 18px;
+  }
 }
 
 /* Hover only on devices that can hover (no sticky states after a tap). */
