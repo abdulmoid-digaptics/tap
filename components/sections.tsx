@@ -1,5 +1,4 @@
 import type { CSSProperties, ReactNode } from "react";
-import { cacheLife } from "next/cache";
 import {
   capabilities,
   hero,
@@ -615,9 +614,7 @@ export function FinalCta() {
 /* ==========================================================================
    Footer
    ========================================================================== */
-async function CurrentYear() {
-  "use cache";
-  cacheLife("days");
+function CurrentYear() {
   return <>{new Date().getFullYear()}</>;
 }
 
