@@ -37,7 +37,7 @@
 .hero {
   padding-top: clamp(1.5rem, 1rem + 3vw, 4rem);
   padding-bottom: clamp(48px, 6vw, 96px);
-  overflow: clip;
+  overflow-x: clip;
 }
 .heroGrid {
   display: grid;
@@ -240,6 +240,7 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(16px, 2.4vw, 32px);
+  overflow: hidden;
 }
 .step {
   display: grid;
@@ -746,6 +747,7 @@
 }
 .concepts {
   margin-top: clamp(48px, 6vw, 88px);
+  overflow: hidden;
 }
 .conceptsLabel {
   font-family: var(--font-label);
