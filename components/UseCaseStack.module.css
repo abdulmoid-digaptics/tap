@@ -400,12 +400,12 @@
     gap: 8px;
   }
   .meta {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
   }
   .index {
-    min-height: 24px;
-    padding: 0 8px;
-    font-size: 0.7rem;
+    min-height: 26px;
+    padding: 0 9px;
+    font-size: 0.8rem;
   }
   .sceneTeam > * {
     width: 52%;

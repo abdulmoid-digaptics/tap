@@ -177,11 +177,10 @@
   .badge {
     top: 14px;
     left: 14px;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
   }
-  .swatchChip {
-    width: 40px;
-    height: 40px;
+  .swatches {
+    gap: 8px;
   }
   .input {
     min-height: 46px;
@@ -201,9 +200,10 @@
     padding: 16px;
     gap: 14px;
   }
+  /* Swatches keep a 44px tap size on every phone; they wrap instead of shrinking. */
   .swatchChip {
-    width: 34px;
-    height: 34px;
+    width: 44px;
+    height: 44px;
   }
 }
 

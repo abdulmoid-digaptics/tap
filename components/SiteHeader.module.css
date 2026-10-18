@@ -207,3 +207,11 @@
     transform: translateX(4px);
   }
 }
+
+/* Large displays: keep the header in proportion with the larger type scale. */
+@media (min-width: 1800px) {
+  .desktopNav a {
+    font-size: 1.0625rem;
+    padding: 0 18px;
+  }
+}

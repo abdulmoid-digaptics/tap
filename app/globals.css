@@ -222,6 +222,32 @@ a {
   }
 }
 
+/* Large displays (Full HD, QHD): widen the layout and scale the type up a step so the
+   page fills the screen instead of floating in empty space. */
+@media (min-width: 1800px) {
+  :root {
+    --content: 1520px;
+    --fs-h1: 6.25rem;
+    --fs-h2: 4.75rem;
+    --fs-h3: 1.8rem;
+    --fs-lead: 1.375rem;
+    --fs-body: 1.1875rem;
+    --section-y: 8.5rem;
+  }
+}
+@media (min-width: 2400px) {
+  :root {
+    --content: 1720px;
+    --fs-h1: 7rem;
+    --fs-h2: 5.25rem;
+    --fs-h3: 2rem;
+    --fs-lead: 1.5rem;
+    --fs-body: 1.25rem;
+    --section-y: 9.5rem;
+    --header-h: 88px;
+  }
+}
+
 /* ==========================================================================
    Layout primitives
    ========================================================================== */
@@ -453,6 +479,7 @@ a {
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important; /* no invisible wait on delayed entrances */
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     transition-delay: 0ms !important;

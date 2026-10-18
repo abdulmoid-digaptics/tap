@@ -1005,9 +1005,6 @@
 
 /* --- 2560px QHD and above: give text and art more breathing room --- */
 @media (min-width: 2200px) {
-  .heroStage {
-    max-width: 720px;
-  }
   .finalArt {
     max-width: 600px;
   }
@@ -1151,8 +1148,9 @@
     right: 6%;
   }
   .heroPhone figcaption {
-    font-size: 0.62rem;
-    padding: 5px 10px;
+    font-size: 0.8rem;
+    padding: 5px 11px;
+    letter-spacing: 0.06em;
   }
   .heroDot {
     width: 13%;

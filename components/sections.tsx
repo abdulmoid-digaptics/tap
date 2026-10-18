@@ -614,8 +614,9 @@ export function FinalCta() {
 /* ==========================================================================
    Footer
    ========================================================================== */
+/** Year of the build (set in next.config.ts), so prerendering never reads the clock. */
 function CurrentYear() {
-  return <>{new Date().getFullYear()}</>;
+  return <>{process.env.BUILD_YEAR}</>;
 }
 
 export function SiteFooter() {

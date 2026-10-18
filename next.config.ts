@@ -3,14 +3,17 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   output: "export",
+  // Static export: the footer year is fixed at build time (no Date() during prerender).
+  env: {
+    BUILD_YEAR: String(new Date().getFullYear()),
+  },
   images: {
     unoptimized: true,
   },
   experimental: {
     agentFeedback: true,
   },
-  cacheComponents: true,
-  partialPrefetching: true,
+  // cacheComponents / partialPrefetching need a server (PPR); they cannot be used with output: "export".
   turbopack: {
     rules: {
       "*.css": {
@@ -24,25 +27,3 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
