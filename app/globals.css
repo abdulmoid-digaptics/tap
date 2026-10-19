@@ -57,7 +57,7 @@
   --space-9: 6rem;
   --gutter: clamp(1.25rem, 0.4rem + 3.6vw, 4rem);
   --content: 1320px;
-  --section-y: clamp(3.5rem, 2rem + 5.2vw, 7.5rem);
+  --section-y: clamp(2.75rem, 1.6rem + 3.4vw, 5rem);
   --header-h: 76px;
 
   /* Shape */
@@ -194,7 +194,7 @@ a {
    -------------------------------------------------------------------------- */
 @media (max-width: 639px) {
   :root {
-    --section-y: clamp(3rem, 1.8rem + 4.5vw, 5rem);
+    --section-y: clamp(2.5rem, 1.6rem + 3vw, 3.5rem);
     --fs-h2: clamp(1.9rem, 1rem + 4vw, 3rem);
   }
 }
@@ -202,7 +202,7 @@ a {
 @media (max-width: 479px) {
   :root {
     --header-h: 64px;
-    --section-y: clamp(2.5rem, 1.5rem + 4vw, 4rem);
+    --section-y: clamp(2.25rem, 1.4rem + 3vw, 3rem);
     --fs-h2: clamp(1.75rem, 0.8rem + 4.5vw, 2.6rem);
   }
   .btn {
@@ -240,7 +240,7 @@ a {
     --fs-h3: 1.8rem;
     --fs-lead: 1.375rem;
     --fs-body: 1.1875rem;
-    --section-y: 8.5rem;
+    --section-y: 5.75rem;
   }
 }
 @media (min-width: 2400px) {
@@ -251,7 +251,7 @@ a {
     --fs-h3: 2rem;
     --fs-lead: 1.5rem;
     --fs-body: 1.25rem;
-    --section-y: 9.5rem;
+    --section-y: 6.5rem;
     --header-h: 88px;
   }
 }

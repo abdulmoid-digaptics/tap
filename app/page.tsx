@@ -1,4 +1,7 @@
+import { CardPlayground } from "@/components/CardPlayground";
+import { CardStudio } from "@/components/CardStudio";
 import { MotionController } from "@/components/MotionController";
+import { PeopleShowcase } from "@/components/PeopleShowcase";
 import { RevealObserver } from "@/components/RevealObserver";
 import { ScrollAnimations } from "@/components/ScrollAnimations";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -29,8 +32,11 @@ export default function Home() {
         <HowItWorks />
         <ProductCollection />
         <ProfileFeature />
+        <CardStudio />
+        <PeopleShowcase />
         <UseCases />
         <BrandSection />
+        <CardPlayground />
         <TeamsSection />
         <FaqSection />
         <FinalCta />

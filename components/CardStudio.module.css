@@ -1,0 +1,878 @@
+/* ==========================================================================
+   Card studio — a phone builds a digital card in three steps while physical
+   cards fan around it. The active step is set on .layout[data-step].
+   ========================================================================== */
+.studio {
+  position: relative;
+  background:
+    radial-gradient(60% 50% at 85% 30%, rgba(31, 75, 255, 0.08), transparent 70%),
+    radial-gradient(50% 40% at 10% 90%, rgba(255, 106, 61, 0.08), transparent 70%),
+    var(--ivory);
+}
+
+.head {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 20px clamp(32px, 6vw, 96px);
+  align-items: end;
+  margin-bottom: clamp(1.75rem, 0.5rem + 3vw, 3.5rem);
+}
+.headTitle {
+  display: grid;
+  gap: 18px;
+}
+@media (max-width: 799px) {
+  .head {
+    grid-template-columns: 1fr;
+  }
+}
+.eyebrowSignal {
+  width: 18px;
+  height: 18px;
+  color: var(--cobalt);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: clamp(2rem, 1rem + 4vw, 5rem);
+  align-items: center;
+}
+
+/* --------------------------------------------------------------------------
+   Steps
+   -------------------------------------------------------------------------- */
+.steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+.stepButton {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-4);
+  width: 100%;
+  padding: var(--space-5) var(--space-5) var(--space-5) var(--space-5);
+  border: 0;
+  border-radius: var(--r-lg);
+  background: rgba(255, 255, 255, 0.45);
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px var(--line);
+  transition:
+    background-color var(--dur-slow) var(--ease-out),
+    box-shadow var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out);
+}
+.stepActive .stepButton {
+  background: var(--white);
+  box-shadow: inset 0 0 0 1px transparent, var(--shadow-card);
+  transform: scale(1.02);
+}
+.stepNumber {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-family: var(--font-label);
+  font-size: var(--fs-label);
+  color: var(--ink-muted);
+  background: var(--ivory-deep);
+  transition: background-color var(--dur) var(--ease-out), color var(--dur) var(--ease-out);
+}
+.stepActive .stepNumber {
+  background: var(--cobalt);
+  color: var(--white);
+}
+.stepBody {
+  display: grid;
+  gap: var(--space-2);
+  align-self: center;
+}
+.stepTitle {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-h3);
+  letter-spacing: var(--tracking-display);
+  line-height: 1.08;
+}
+.step:not(.stepActive) .stepTitle {
+  color: var(--ink-muted);
+}
+.stepText {
+  color: var(--ink-muted);
+  max-width: 32em;
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    grid-template-rows var(--dur-slow) var(--ease-out),
+    opacity var(--dur-slow) var(--ease-out);
+}
+.stepText > span {
+  min-height: 0;
+}
+.stepActive .stepText {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+/* progress bar along the bottom of the active step */
+.stepBar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 4px;
+  background: var(--gradient-electric);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+.stepActive .stepBar {
+  transform: scaleX(1);
+}
+.layout[data-playing] .stepActive .stepBar {
+  animation: step-progress var(--step-ms, 5s) linear both;
+}
+@keyframes step-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+.controlsRow {
+  display: flex;
+  padding-top: var(--space-2);
+}
+.pauseBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 40px;
+  padding: 0 16px 0 12px;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: transparent;
+  color: var(--ink-muted);
+  font: 600 0.875rem/1 var(--font-body);
+  cursor: pointer;
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+}
+.pauseIcon {
+  width: 10px;
+  height: 12px;
+  border-inline: 3px solid currentColor;
+}
+.pauseIcon[data-paused] {
+  border: 0;
+  border-left: 10px solid currentColor;
+  border-block: 6px solid transparent;
+  height: 0;
+}
+@media (hover: hover) and (pointer: fine) {
+  .step:not(.stepActive) .stepButton:hover {
+    background: rgba(255, 255, 255, 0.8);
+  }
+  .pauseBtn:hover {
+    color: var(--ink);
+    box-shadow: inset 0 0 0 1.5px var(--ink);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Stage (sticky on wide screens)
+   -------------------------------------------------------------------------- */
+.stageWrap {
+  position: relative;
+}
+.stage {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  margin-inline: auto;
+  aspect-ratio: 1 / 1.08;
+}
+.glow {
+  position: absolute;
+  inset: 8% 6%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, var(--cobalt-soft), transparent);
+  transition: background var(--dur-slow) var(--ease-out);
+}
+.layout[data-step="1"] .glow {
+  background: radial-gradient(closest-side, var(--tangerine-soft), transparent);
+}
+.layout[data-step="2"] .glow {
+  background: radial-gradient(closest-side, var(--lavender), transparent);
+}
+.orbit {
+  position: absolute;
+  inset: 4%;
+  border-radius: 50%;
+  border: 1.5px dashed var(--line-strong);
+  animation: orbit-spin 40s linear infinite;
+}
+.orbit::after {
+  content: "";
+  position: absolute;
+  top: 12%;
+  left: 12%;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--tangerine);
+  box-shadow: 0 0 0 6px rgba(255, 106, 61, 0.18);
+}
+
+.phone {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 44%;
+  transform: translate(-50%, -50%) rotate(0deg);
+  z-index: 3;
+  transition: transform 900ms var(--ease-out);
+}
+.layout[data-step="1"] .phone {
+  transform: translate(-50%, -50%) rotate(-4deg);
+}
+.layout[data-step="2"] .phone {
+  transform: translate(-62%, -50%) rotate(-2deg);
+}
+
+/* Physical cards ---------------------------------------------------------- */
+.fan {
+  position: absolute;
+  inset: 0;
+}
+.fanCard {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 46%;
+  transition:
+    transform 1000ms var(--ease-out),
+    opacity 700ms var(--ease-out);
+  will-change: transform;
+}
+.fanCard > * {
+  animation: card-bob 6s var(--ease-in-out) infinite;
+}
+.fanCard1 > * {
+  animation-delay: -2s;
+}
+.fanCard2 > * {
+  animation-delay: -4s;
+}
+
+/* step 1: tucked behind the phone */
+.fanCard0 {
+  z-index: 1;
+  transform: translate(-96%, -78%) rotate(-12deg);
+}
+.fanCard1 {
+  z-index: 1;
+  transform: translate(-4%, -10%) rotate(9deg);
+}
+.fanCard2 {
+  z-index: 1;
+  transform: translate(-92%, 34%) rotate(7deg) scale(0.9);
+}
+
+/* step 2: fanned out to show different looks */
+.layout[data-step="1"] .fanCard0 {
+  transform: translate(-108%, -112%) rotate(-16deg);
+}
+.layout[data-step="1"] .fanCard1 {
+  transform: translate(10%, -60%) rotate(12deg);
+}
+.layout[data-step="1"] .fanCard2 {
+  z-index: 4;
+  transform: translate(-118%, 52%) rotate(-8deg) scale(0.96);
+}
+
+/* step 3: the cobalt card comes in to tap the phone, the others drift back */
+.layout[data-step="2"] .fanCard0 {
+  opacity: 0.55;
+  transform: translate(-104%, 40%) rotate(-20deg) scale(0.86);
+}
+.layout[data-step="2"] .fanCard1 {
+  opacity: 0.55;
+  transform: translate(-88%, -128%) rotate(-6deg) scale(0.82);
+}
+.layout[data-step="2"] .fanCard2 {
+  z-index: 5;
+  transform: translate(26%, -82%) rotate(-14deg);
+}
+.layout[data-step="2"] .fanCard2 > * {
+  animation: card-tap 2.4s var(--ease-in-out) infinite;
+}
+
+.rings {
+  position: absolute !important;
+  left: 46%;
+  top: 34%;
+  width: 34% !important;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity var(--dur-slow) var(--ease-out);
+}
+.layout[data-step="2"] .rings {
+  opacity: 1;
+}
+
+/* Floating tags */
+.floatTag1,
+.floatTag2 {
+  position: absolute;
+  z-index: 6;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: var(--r-pill);
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: var(--shadow-sm);
+  opacity: 0;
+  transform: translateY(12px) scale(0.92);
+  transition:
+    opacity var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out);
+}
+.floatTag1 svg {
+  width: 16px;
+  height: 16px;
+}
+.floatTag1 {
+  right: 2%;
+  bottom: 20%;
+  background: var(--mint);
+  color: var(--ink);
+}
+.floatTag2 {
+  left: 0;
+  top: 18%;
+  background: var(--ink);
+  color: var(--ivory);
+}
+.layout[data-step="2"] .floatTag1 {
+  opacity: 1;
+  transform: none;
+  transition-delay: 900ms;
+}
+.layout[data-step="2"] .floatTag2 {
+  opacity: 1;
+  transform: none;
+  transition-delay: 500ms;
+}
+
+/* --------------------------------------------------------------------------
+   Phone screen: the mini editor (sizes in cqw of the phone)
+   -------------------------------------------------------------------------- */
+.screen {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4cqw;
+  padding: 15cqw 6cqw 6cqw;
+  background: linear-gradient(180deg, var(--ivory) 0%, var(--white) 40%);
+  color: var(--ink);
+  font-size: 4cqw;
+  line-height: 1.3;
+}
+.appBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.appTitle {
+  display: inline-flex;
+  align-items: center;
+  gap: 2cqw;
+  font-weight: 700;
+  font-size: 5cqw;
+  letter-spacing: -0.02em;
+}
+.appTitle svg {
+  width: 5cqw;
+  height: 5cqw;
+}
+.appBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.4cqw;
+  padding: 1cqw 3cqw;
+  border-radius: 99px;
+  background: var(--mint);
+  font-size: 3.2cqw;
+  font-weight: 600;
+}
+.appBadge::before {
+  content: "";
+  width: 1.8cqw;
+  height: 1.8cqw;
+  border-radius: 50%;
+  background: #12a150;
+  animation: live-dot 1.6s ease-in-out infinite;
+}
+
+/* the digital card preview */
+.miniCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6cqw;
+  padding: 5cqw;
+  border-radius: 5cqw;
+  aspect-ratio: 85.6 / 54;
+  justify-content: flex-end;
+  background: var(--cobalt);
+  color: var(--white);
+  box-shadow: 0 3cqw 6cqw -3cqw rgba(14, 26, 24, 0.45);
+  overflow: hidden;
+  transition: background-color var(--dur-slow) var(--ease-out);
+}
+.miniCard::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.28) 45%, transparent 60%);
+  transform: translateX(-100%);
+  animation: mini-sheen 4.5s var(--ease-in-out) infinite;
+}
+.miniCardTop {
+  position: absolute;
+  top: 5cqw;
+  left: 5cqw;
+  right: 5cqw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.miniLogo {
+  display: grid;
+  place-items: center;
+  width: 8cqw;
+  height: 8cqw;
+  border-radius: 2.4cqw;
+  background: var(--lime);
+  color: var(--ink);
+  font-weight: 800;
+  font-size: 4.4cqw;
+  transform: scale(0);
+  transition: transform 500ms var(--ease-out);
+}
+.miniSignal {
+  width: 7cqw;
+  height: 7cqw;
+  color: var(--lime);
+  stroke-width: 2;
+}
+.miniPhoto {
+  position: relative;
+  width: 12cqw;
+  height: 12cqw;
+  margin-bottom: 1.6cqw;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 0 0 0.8cqw rgba(255, 255, 255, 0.55);
+}
+.miniPhoto img {
+  object-fit: cover;
+}
+.miniName {
+  font-weight: 700;
+  font-size: 6.4cqw;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.miniRole {
+  font-size: 3.4cqw;
+  opacity: 0.8;
+}
+.layout:not([data-step="0"]) .miniLogo {
+  transform: scale(1);
+}
+.layout[data-step="1"] .miniCard {
+  animation: mini-colors 3.3s steps(1, end) infinite;
+}
+
+/* panels share one slot below the card */
+.panel {
+  position: absolute;
+  left: 6cqw;
+  right: 6cqw;
+  top: 74cqw;
+  display: flex;
+  flex-direction: column;
+  gap: 2.6cqw;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(4cqw);
+  transition:
+    opacity 450ms var(--ease-out),
+    transform 450ms var(--ease-out),
+    visibility 0s linear 450ms;
+}
+.layout[data-step="0"] .panelFields,
+.layout[data-step="1"] .panelStyle,
+.layout[data-step="2"] .panelShare {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 150ms, 150ms, 0s;
+}
+
+/* step 1 — fields type in */
+.field {
+  display: flex;
+  align-items: center;
+  gap: 3cqw;
+  padding: 2.6cqw 3cqw;
+  border-radius: 3.4cqw;
+  background: var(--white);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+.fieldIcon {
+  display: grid;
+  place-items: center;
+  width: 8.4cqw;
+  height: 8.4cqw;
+  border-radius: 2.6cqw;
+  background: var(--cobalt-soft);
+  flex: none;
+}
+.fieldIcon svg {
+  width: 4.4cqw;
+  height: 4.4cqw;
+}
+.fieldText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.fieldText span:first-child {
+  font-size: 3cqw;
+  color: var(--ink-muted);
+}
+.fieldValue {
+  font-weight: 600;
+  font-size: 3.7cqw;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+}
+.layout[data-step="0"] .field {
+  animation: rise-in 500ms var(--ease-out) both;
+  animation-delay: calc(var(--i) * 260ms + 200ms);
+}
+.layout[data-step="0"] .fieldValue {
+  animation: type-in 900ms steps(18, end) both;
+  animation-delay: calc(var(--i) * 260ms + 450ms);
+}
+
+/* step 2 — colors and links */
+.panelLabel {
+  font-size: 3cqw;
+  font-family: var(--font-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.swatches {
+  display: flex;
+  gap: 2.6cqw;
+}
+.swatch {
+  width: 9cqw;
+  height: 9cqw;
+  border-radius: 50%;
+  background: var(--sw);
+  box-shadow: inset 0 0 0 1px rgba(14, 26, 24, 0.15);
+}
+.layout[data-step="1"] .swatch {
+  animation: swatch-pick 3.3s steps(1, end) infinite;
+  animation-delay: calc(var(--i) * 0.66s);
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2cqw;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.4cqw;
+  padding: 1.8cqw 3cqw;
+  border-radius: 99px;
+  background: var(--white);
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+  font-size: 3.4cqw;
+  font-weight: 600;
+}
+.chip svg {
+  width: 3.6cqw;
+  height: 3.6cqw;
+}
+.layout[data-step="1"] .chip {
+  animation: pop-in 520ms var(--ease-out) both;
+  animation-delay: calc(var(--i) * 180ms + 350ms);
+}
+
+/* step 3 — share */
+.panelShare {
+  align-items: center;
+}
+.qrWrap {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 34cqw;
+  height: 34cqw;
+  padding: 3cqw;
+  border-radius: 4cqw;
+  background: var(--white);
+  box-shadow: inset 0 0 0 1px var(--line), 0 2cqw 5cqw -3cqw rgba(14, 26, 24, 0.3);
+  overflow: hidden;
+}
+.qr {
+  width: 100%;
+  height: 100%;
+  color: var(--ink);
+}
+.qrScan {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  background: var(--cobalt);
+  box-shadow: 0 0 4cqw 1cqw rgba(31, 75, 255, 0.45);
+  animation: qr-scan 2.2s var(--ease-in-out) infinite alternate;
+}
+.shareGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2cqw;
+  width: 100%;
+}
+.shareOpt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2cqw;
+  font-size: 2.8cqw;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+}
+.shareIcon {
+  display: grid;
+  place-items: center;
+  width: 11cqw;
+  height: 11cqw;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--lime);
+}
+.shareIcon svg {
+  width: 5.2cqw;
+  height: 5.2cqw;
+}
+.layout[data-step="2"] .shareOpt {
+  animation: pop-in 520ms var(--ease-out) both;
+  animation-delay: calc(var(--i) * 120ms + 300ms);
+}
+.toast {
+  position: absolute;
+  left: 50%;
+  top: -66cqw;
+  display: inline-flex;
+  align-items: center;
+  gap: 1.6cqw;
+  padding: 2.2cqw 4cqw;
+  border-radius: 99px;
+  background: var(--ink);
+  color: var(--ivory);
+  font-size: 3.4cqw;
+  font-weight: 600;
+  white-space: nowrap;
+  transform: translate(-50%, -6cqw);
+  opacity: 0;
+}
+.toast svg {
+  width: 4cqw;
+  height: 4cqw;
+  color: var(--lime);
+}
+.layout[data-step="2"] .toast {
+  animation: toast 2.4s var(--ease-out) infinite;
+}
+
+/* --------------------------------------------------------------------------
+   Keyframes
+   -------------------------------------------------------------------------- */
+@keyframes orbit-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes card-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+@keyframes card-tap {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  40%,
+  55% {
+    transform: translate(-14%, 6%) rotate(4deg);
+  }
+}
+@keyframes live-dot {
+  50% {
+    opacity: 0.3;
+  }
+}
+@keyframes mini-sheen {
+  0%,
+  55% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+@keyframes mini-colors {
+  0% {
+    background-color: #1f4bff;
+    color: #fff;
+  }
+  20% {
+    background-color: #ff6a3d;
+    color: #0e1a18;
+  }
+  40% {
+    background-color: #0e1a18;
+    color: #faf8f3;
+  }
+  60% {
+    background-color: #ff2d8d;
+    color: #0e1a18;
+  }
+  80% {
+    background-color: #d7ff3b;
+    color: #0e1a18;
+  }
+}
+@keyframes swatch-pick {
+  0% {
+    box-shadow: 0 0 0 0.8cqw var(--white), 0 0 0 1.6cqw var(--ink);
+    transform: scale(1.08);
+  }
+  20%,
+  100% {
+    box-shadow: inset 0 0 0 1px rgba(14, 26, 24, 0.15);
+    transform: none;
+  }
+}
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(3cqw);
+  }
+}
+@keyframes type-in {
+  from {
+    max-width: 0;
+  }
+  to {
+    max-width: 60cqw;
+  }
+}
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+}
+@keyframes qr-scan {
+  to {
+    top: calc(100% - 2px);
+  }
+}
+@keyframes toast {
+  0%,
+  35% {
+    opacity: 0;
+    transform: translate(-50%, -6cqw);
+  }
+  48%,
+  88% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 0);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Small screens: stage on top, compact steps that advance on their own
+   -------------------------------------------------------------------------- */
+@media (max-width: 959px) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+  .stageWrap {
+    position: relative;
+    top: auto;
+    order: -1;
+  }
+  .stage {
+    max-width: 440px;
+  }
+  .stepButton {
+    padding: var(--space-4);
+  }
+  .stepActive .stepButton {
+    transform: none;
+  }
+}
+@media (max-width: 479px) {
+  .floatTag1,
+  .floatTag2 {
+    font-size: 0.75rem;
+    padding: 6px 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbit,
+  .fanCard > *,
+  .qrScan,
+  .miniCard::after {
+    animation: none !important;
+  }
+}

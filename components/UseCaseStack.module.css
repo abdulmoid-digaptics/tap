@@ -11,7 +11,8 @@
   padding: 0;
   display: grid;
   gap: clamp(24px, 4vh, 48px);
-  overflow: hidden;
+  /* No overflow here: overflow hidden/auto makes this list the sticky panels' scroll
+     container, so they would pin to it instead of the page and never stack. */
 }
 
 .item {

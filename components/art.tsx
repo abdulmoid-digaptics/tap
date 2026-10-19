@@ -1,4 +1,6 @@
+import Image from "next/image";
 import { useId, type CSSProperties, type ReactNode } from "react";
+import mayaPhoto from "@/public/people/maya.webp";
 import styles from "./art.module.css";
 import p from "./productArt.module.css";
 import {
@@ -187,7 +189,9 @@ export function ProfileScreen({ variant = "compact", cover = "#1F4BFF", live }: 
         <Signal className={`${styles.profileCoverSignal} ${styles.signalLive}`} />
       </div>
       <div className={styles.profileHead}>
-        <span className={styles.profileAvatar}>MR</span>
+        <span className={styles.profileAvatar}>
+          <Image src={mayaPhoto} alt="" fill sizes="96px" />
+        </span>
         <span className={styles.profileName}>Maya Reyes</span>
         <span className={styles.profileRole}>Studio Lead · Northline Interiors</span>
       </div>

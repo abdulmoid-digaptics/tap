@@ -20,7 +20,9 @@ import {
   SignalRings,
   cardThemes,
 } from "./art";
+import { people } from "@/content/people";
 import { DesignPreview } from "./DesignPreview";
+import { Avatar } from "./PeopleArt";
 import { FaqAccordion } from "./FaqAccordion";
 import {
   ArrowRight,
@@ -99,9 +101,19 @@ export function Hero() {
               {hero.secondary.label}
             </a>
           </div>
-          <p className={s.heroNote}>
-            <Check /> No app needed to open a profile
-          </p>
+          <div className={s.heroProof}>
+            <span className={s.heroAvatars} aria-hidden="true">
+              {people.slice(0, 5).map((person) => (
+                <Avatar key={person.id} person={person} size={38} className={s.heroAvatar} />
+              ))}
+            </span>
+            <span className={s.heroProofText}>
+              <strong>Made for people who meet people</strong>
+              <span className={s.heroNote}>
+                <Check /> No app needed to open a profile
+              </span>
+            </span>
+          </div>
         </div>
 
         <div className={s.heroStage} data-anim data-parallax="-60">
@@ -446,6 +458,10 @@ const concepts = [
   { theme: cardThemes.ink, name: "Marcus Hale", role: "Head Coach", company: "Atlas Fitness" },
   { theme: cardThemes.fuchsia, name: "Priya Shah", role: "Research Lead", company: "Brightside Labs" },
   { theme: cardThemes.cobalt, name: "Sam Ortiz", role: "Partner", company: "Ortiz Legal" },
+  { theme: cardThemes.mint, name: "Kenji Mori", role: "Realtor", company: "Harbor Homes" },
+  { theme: cardThemes.violet, name: "Amara Okafor", role: "Event Producer", company: "Lumen Live" },
+  { theme: cardThemes.lime, name: "Liam Walsh", role: "Founder", company: "Patchwork" },
+  { theme: cardThemes.ivory, name: "Maya Reyes", role: "Studio Lead", company: "Northline Interiors" },
 ];
 
 export function BrandSection() {
@@ -469,10 +485,15 @@ export function BrandSection() {
         </div>
         <div className={s.concepts} data-reveal>
           <p className={s.conceptsLabel}>Card concepts for illustration</p>
-          <div className={s.conceptRow} aria-hidden="true" data-anim data-drift>
-            {concepts.map((concept, index) => (
-              <NfcCard key={concept.company} className={s.concept} sheenDelay={index * 1.6} {...concept} />
-            ))}
+          {/* An endless loop: the list is rendered twice and the track slides by half its width. */}
+          <div className={s.conceptViewport} aria-hidden="true" data-anim>
+            <div className={s.conceptTrack}>
+              {[...concepts, ...concepts].map((concept, index) => (
+                <div key={`${concept.company}-${index}`} className={s.conceptSlot}>
+                  <NfcCard className={s.concept} sheenDelay={(index % concepts.length) * 1.1} {...concept} />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
